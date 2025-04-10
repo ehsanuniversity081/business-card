@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پورتال تصاویر محلی</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .images-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .image-box {
+            width: 48%;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .image-wrapper {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .image-wrapper:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+        
+        .link-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .link-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .link-box a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .right-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* مدال برای نمایش تصویر بزرگ */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .image-box {
+                width: 100%;
+            }
+            
+            .image-wrapper {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>پورتال تصاویر و لینک‌ها</h1>
+        </div>
+        
+        <div class="images-container">
+            <!-- تصویر و لینک سمت راست -->
+            <div class="image-box">
+                <div class="image-wrapper" onclick="openModal('images/right-image.jpg')">
+                    <img src="https://i.postimg.cc/J7pP32Wn/April8-031719-AM.png" alt="تصویر سمت راست">
+                </div>
+                <div class="link-box">
+                    <a href="#" target="_blank">ورود به لینک</a>
+                </div>
+            </div>
+            
+            <!-- تصویر و لینک‌های سمت چپ -->
+            <div class="image-box">
+                <div class="image-wrapper" onclick="openModal('images/left-image.jpg')">
+                    <img src="https://i.postimg.cc/brvJxJfm/photo-2025-04-10-19-33-50.jpg" alt="تصویر سمت چپ">
+                </div>
+                <div class="right-links">
+                    <div class="link-box">
+                        <a href="#" target="_blank">تهران 360</a>
+                    </div>
+                    <div class="link-box">
+                        <a href="#" target="_blank">شهرزاد</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مدال نمایش تصویر بزرگ -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // تابع برای باز کردن مدال با تصویر بزرگ
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+            
+            // بستن مدال با کلیک خارج از تصویر
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            }
+        }
+        
+        // تابع برای بستن مدال
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+        
+        // بستن مدال با کلید ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
