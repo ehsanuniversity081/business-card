@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پورتال خدمات شهری</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: var(--dark-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .header p {
+            color: #6c757d;
+            font-size: 0.9rem;
+            max-width: 100%;
+            margin: 0 auto;
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .link-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+            text-align: center;
+            padding: 15px 10px;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .link-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .link-item:hover::before {
+            opacity: 1;
+        }
+        
+        .link-icon {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .link-item:hover .link-icon {
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .link-title {
+            font-size: 0.85rem;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .link-item:hover .link-title {
+            color: white;
+        }
+        
+        a.link-wrapper {
+            text-decoration: none;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        /* تنظیمات واکنش‌گرایی */
+        @media (max-width: 992px) {
+            .links-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px;
+            }
+            
+            .link-item {
+                padding: 12px 8px;
+                min-height: 90px;
+            }
+            
+            .link-icon {
+                font-size: 1.6rem;
+            }
+            
+            .link-title {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .link-item {
+                padding: 10px 5px;
+                min-height: 80px;
+                border-radius: 10px;
+            }
+            
+            .link-icon {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+            }
+            
+            .link-title {
+                font-size: 0.75rem;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .header p {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>پورتال خدمات شهری</h1>
+            <p>دسترسی سریع به خدمات آب، برق، مخابرات و گاز</p>
+        </div>
+        
+        <div class="links-grid">
+            <!-- لینک 1 - آبفا -->
+            <div class="link-item">
+                <i class="fas fa-tint link-icon"></i>
+                <h3 class="link-title">آبفا</h3>
+                <a href="https://my.nww.ir/" class="link-wrapper" target="_blank"></a>
+            </div>
+            
+            <!-- لینک 2 - برق -->
+            <div class="link-item">
+                <i class="fas fa-bolt link-icon"></i>
+                <h3 class="link-title">برق من</h3>
+                <a href="https://bargheman.com/b/9150206804127" class="link-wrapper" target="_blank"></a>
+            </div>
+            
+            <!-- لینک 3 - مخابرات -->
+            <div class="link-item">
+                <i class="fas fa-phone-alt link-icon"></i>
+                <h3 class="link-title">مخابرات</h3>
+                <a href="https://my.tci.ir/login" class="link-wrapper" target="_blank"></a>
+            </div>
+            
+            <!-- لینک 4 - گاز -->
+            <div class="link-item">
+                <i class="fas fa-fire link-icon"></i>
+                <h3 class="link-title">گاز</h3>
+                <a href="https://ebill.tehrangasco.ir/3213229271%20-09134475586-4" class="link-wrapper" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
